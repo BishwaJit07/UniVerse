@@ -13,18 +13,27 @@ import DashBoard from '../Component/DashBoard/DashBoard';
 
 import AddNotice from '../Component/DashBoard/Notice/AddNotice';
 import AllNoticeCard from '../Component/Home/HomeComponent/Notice/AllNoticeCard';
+import AdminProfile from '../Component/DashBoard/Profile/AdminProfile';
+import MyBlogs from '../Component/Home/Blogs/MyBlogs';
+import MyNotice from '../Component/DashBoard/Notice/MyNotice';
+import AllUsers from '../Component/DashBoard/AllUsers/AllUsers';
+import AboutPage from '../Component/Aboutpage/AboutPage';
+import ForgetPass from '../Component/SignUp/ForgetPass';
+import ManageBlogs from '../Component/DashBoard/ManageBlogs/ManageBlogs';
 
 const router = createBrowserRouter([
 
     {
         path:"/",
-        element:<Main/>,
+        element: 
+            <Main/>
+            ,
        
         children:[
            
             {
                 path:"/",
-                element:<Home/>
+                element: <Home/>
             },
             {
                 path:"login",
@@ -62,14 +71,78 @@ const router = createBrowserRouter([
                    </PrivateRoute> 
             },
             {
-                   path:"/addnotice",
+                   path:"/myblogs",
                    element: <PrivateRoute>
-                           <AddNotice/>
-                   </PrivateRoute> 
-            }
+                    <MyBlogs/>
+                   </PrivateRoute>
+                           
+                 
+            },
+            
+            {
+                   path:"/about",
+                   element: 
+                           <AboutPage/>
+                 
+            },
+            {
+                   path:"/forgetpass",
+                   element: 
+                           <ForgetPass/>
+                 
+            },
+            {
+                path:"/profile",
+                element: 
+                        <AdminProfile/>
+                
+            },
            
         ]
-    }
+    },
+
+    {
+        path:'dashboard',
+        element: <PrivateRoute>
+          <DashBoard/>
+        </PrivateRoute>,
+
+        children:[
+            {
+                path:"addnotice",
+                element: 
+                        <AddNotice/>
+                
+            },
+            {
+                path:"profile",
+                element: 
+                        <AdminProfile/>
+                
+            },
+            {
+                path:"mynotice",
+                element: 
+                        <MyNotice/>
+                
+            }
+            ,
+            {
+                path:"alluser",
+                element: 
+                        <AllUsers/>
+                
+            }
+            ,
+            {
+                path:"manageblogs",
+                element: 
+                        <ManageBlogs/>
+                
+            }
+
+        ]
+      }
 ]);
 
 export default router;

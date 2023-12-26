@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
+import { BsArrowBarLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Notice = () => {
@@ -12,7 +13,7 @@ const Notice = () => {
   useEffect(() => {
  
 
-    fetch("http://localhost:5000/notice")
+    fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/notice")
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
@@ -28,13 +29,13 @@ const Notice = () => {
     return (
         <div className="my-4 bg-red-200 flex text-black">
           <p className="bg-red-500 text-lg text-white p-2 rounded">  Notice:</p>
-          {noticeData.map((notice) => (
-              <Marquee key={noticeData._id}>
-   <Link to='/noticeard' className="mx-4">{notice?.title}</Link>
-   
+          
+              <Marquee >{noticeData.map((notice) => ( 
+   <Link to='/allnotice' key={notice._id} className="mx-4 flex items-center "> <BsArrowBarLeft /><span className="mx-2">{notice?.title}</span></Link>
+   ))}
   
   </Marquee>
-   ))}
+ 
         </div>
     );
 };

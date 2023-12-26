@@ -1,14 +1,43 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Fotter = () => {
     return (
-        <div>
-            <footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
+      <div>
+          
+      {/* <footer className="footer p-10 text-base-content flex flex-wrap justify-center">
+<nav>
+<header className=' text-base'> <Link to='/blogs'>Blog</Link> 
+</header> 
+
+</nav> 
+<nav>
+<header className=' text-base'>    
+    <Link to='/allnotice'>notice</Link> 
+    </header> 
+
+</nav> 
+<nav>
+<header className='font-bold text-base'>   <Link to='/about'>About us</Link> </header>
+</nav>
+
+<nav>
+<svg xmlns="http://www.w3.org/2000/svg" width="2" height="19" viewBox="0 0 2 19" fill="none">
+<path d="M1 0V19" stroke="#fbffff"/>
+</svg>
+</nav>
+
+</footer> */}
+
+
+<div >
+  <hr />
+            <footer className="footer footer-center p-10 ">
   <nav className="grid grid-flow-col gap-4">
-    <a className="link link-hover">About us</a> 
-    <a className="link link-hover">Contact</a> 
-    <a className="link link-hover">Jobs</a> 
-    <a className="link link-hover">Press kit</a>
+    <Link to='/about'>About us</Link> 
+    
+    <Link to='/allnotice'>notice</Link> 
+    <Link to='/blogs'>Blogs</Link>
   </nav> 
   <nav>
     <div className="grid grid-flow-col gap-4">
@@ -18,10 +47,12 @@ const Fotter = () => {
     </div>
   </nav> 
   <aside>
-    <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+    <p>Copyright © 2023 - All right reserved by UniVerse</p>
   </aside>
 </footer>
         </div>
+
+  </div>
     );
 };
 

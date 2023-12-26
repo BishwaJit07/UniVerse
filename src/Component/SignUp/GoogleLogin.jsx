@@ -25,7 +25,7 @@ const navigate= useNavigate();
             photoURL: loggedUser.photoURL,
             
           } 
-          fetch("http://localhost:5000/users", {
+          fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/users", {
             method: "POST",
             headers: {
           "content-type": "application/json",

@@ -8,7 +8,7 @@ const AllNoticeCard = () => {
     useEffect(() => {
  
 
-      fetch("http://localhost:5000/notice")
+      fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/notice")
         .then((res) => res.json())
         .then((data) => {
           setLoading(false);
@@ -23,10 +23,10 @@ const AllNoticeCard = () => {
     }, []);
     return (
         <div >
-           <div className='m-10 flex flex-col justify-center'>
+           <div className=' mb-4 lg:m-5 flex flex-col justify-center items-center'>
            {/* title  */}
         <div className="text-center mb-12 mt-4">
-        <p className="text-[48px] font-alice text-[#272932] dark:text-white">Latest Notice </p>
+        <p className="text-[48px] font-alice  dark:text-white">Latest Notice </p>
         <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
       
       </div>
@@ -35,6 +35,7 @@ const AllNoticeCard = () => {
           <div  key={notice._id} className="card w-96 bg-blue-800 text-white glass">
            
   <div className="card-body items-center text-center">
+  <figure><img src={notice?.img} className="w-full h-60 lg:h-80" alt="img" /></figure>
     <h2 className="card-title">{notice.title}</h2>
     <div className="divider "></div>
     <p>{notice.details}</p>

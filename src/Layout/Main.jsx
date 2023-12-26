@@ -5,9 +5,9 @@ import Fotter from '../Component/Shared/Fotter';
 
 const Main = () => {
     return (
-        <div>
+        <div >
             <Header/>
-            <div className="max-w-screen-xl mx-auto">
+            <div className="flex-grow max-w-screen-xl mx-auto">
             <Outlet/>
             </div>
            

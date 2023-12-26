@@ -2,18 +2,19 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import GoogleLogin from './GoogleLogin';
 import { sendEmailVerification } from 'firebase/auth';
-import { Result } from 'postcss';
+
 
 const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const {createUser,updateUser}= useContext(AuthContext);
-
+  const [errorMessage, setErrorMessage] = useState('');
+  console.log(errorMessage);
   const {
     register,
     handleSubmit,
@@ -23,6 +24,7 @@ const SignIn = () => {
   } = useForm();
 
   const password = watch("pass");
+
   const onSubmit = (data) => {
     createUser(data.email, data.pass)
     .then((res) => {
@@ -37,7 +39,7 @@ const SignIn = () => {
            
             
           };
-          fetch("http://localhost:5000/users", {
+          fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -56,9 +58,25 @@ const SignIn = () => {
             
         })
         .catch((error) => {
-          console.log("user data update failed", error);
+          if (error.code === "auth/email-already-in-use") {
+            // User already exists
+            setErrorMessage("Email address is already in use. Please use a different email.");
+          } else {
+            setErrorMessage("An error occurred while signing up. Please try again later.");
+          }
+          console.error("User data update failed", error);
         });
+    })
+    .catch((error) => {
+      if (error.code === "auth/email-already-in-use") {
+        // User already exists
+        setErrorMessage("Email address is already in use. Please use a different email.");
+      } else {
+        setErrorMessage("An error occurred while signing up. Please try again later.");
+      }
+      console.error("User creation failed", error);
     });
+    
   };
 
   const emailVerification = (user)=>{
@@ -73,11 +91,17 @@ const SignIn = () => {
                })
   }
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div>
        <div className="hero min-h-screen  ">
       <form
-        className="card-body     w-2/4  rounded-xl glass bg-cover bg-center"
+        className="card-body     w-auto rounded-xl glass bg-cover bg-center "
         onSubmit={handleSubmit(onSubmit)}
         
       >
@@ -118,8 +142,11 @@ const SignIn = () => {
           <label className="label">
             <span className="label-text text-white">Password</span>
           </label>
+          <div className="relative">
+            
+        
           <input
-            type="password"
+           type={showPassword ? 'text' : 'password'}
             placeholder="password"
             name="pass"
             {...register("pass", {
@@ -130,8 +157,17 @@ const SignIn = () => {
               
               // pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/ ,
             })}
-            className="input input-bordered"
+            className="text-md block px-3 py-2 rounded-lg w-full 
+            input input-bordered"
           />
+           <button
+              type="button"
+              className="absolute inset-y-0 right-0 px-2 py-1.5"
+              onClick={handleTogglePassword}
+            >{showPassword ? '🙈' : '👁️'}
+            </button>
+            </div>
+
           {errors.pass?.type === "required" && (
             <p className="text-red-600 bg-white m-2">First name is required</p>
           )}
@@ -146,8 +182,9 @@ const SignIn = () => {
           <label className="label">
             <span className="label-text text-white ">Confirm Password</span>
           </label>
+          <div className=' relative'>
           <input
-            type="password"
+           type={showPassword ? 'text' : 'password'}
             placeholder="Confirm password"
             name="Confirmpass"
             {...register("confirmpass", {
@@ -155,14 +192,24 @@ const SignIn = () => {
               validate: (value) =>
                 value === password || "Passwords do not match",
             })}
-            className="input input-bordered"
+            className="text-md block px-3 py-2 rounded-lg w-full 
+            input input-bordered"
           />
+           <button
+              type="button"
+              className="absolute inset-y-0 right-0 px-2 py-1.5"
+              onClick={handleTogglePassword}
+            >{showPassword ? '🙈' : '👁️'}
+            </button>
+          </div>
+          
           {errors.confirmpass?.type === "required" && (
             <p className="text-red-600 bg-white m-2">Confirm Password is required</p>
           )}
           {errors.confirmpass?.type === "validate" && (
             <p className="text-red-600 m-2 bg-white">{errors.confirmpass.message}</p>
           )}
+           {errorMessage && <p className="text-red-600 p-2 rounded bg-white m-2">{errorMessage}</p>}
         </div>
         
         <div>
