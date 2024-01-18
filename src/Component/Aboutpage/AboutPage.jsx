@@ -16,7 +16,7 @@ const AboutPage = () => {
 
       <div className='flex flex-col md:flex-row'>
             <img src={aboutimg} alt="" className='rounded'/>
-            <p className='m-2 flex justify-center items-center text-center'>There's this notion that to grow a business, you have to be ruthless. But we know there's a better way to grow. One where what's good for the bottom line is also good for customers. We believe businesses can grow with a conscience, and succeed with a soul — and that they can do it with inbound. That's why we've created an ecosystem uniting software, education, and community to help businesses grow better every day.</p>
+            <p className='m-2 flex justify-center items-center text-center'>UniVerse isn't just a platform, it's a movement. We're a team of passionate students who understand the struggles and triumphs of academic life. We've experienced the late-night calculations, the blog post drafts lost in frustration, and the frantic search for important university updates. That's why we decided to build UniVerse – a one-stop hub designed to ease those burdens and empower students to focus on what truly matters: learning, growing, and thriving..</p>
             </div>
 
 
@@ -31,7 +31,7 @@ const AboutPage = () => {
 
       <div className='flex flex-col md:flex-row'>
           
-            <p className='m-2 flex justify-center items-center text-center'>There's this notion that to grow a business, you have to be ruthless. But we know there's a better way to grow. One where what's good for the bottom line is also good for customers. We believe businesses can grow with a conscience, and succeed with a soul — and that they can do it with inbound. That's why we've created an ecosystem uniting software, education, and community to help businesses grow better every day.</p>
+            <p className='m-2 flex justify-center items-center text-center'>Our mission is simple: to equip every student with the tools and resources they need to excel. We believe that technology can be a powerful force for good in education, and UniVerse is our way of proving it. We're constantly innovating, adding new features, and seeking feedback from the very community we serve – because after all, who knows what students need better than students themselves?</p>
 
             <img src={aboutimg} alt="" className='rounded'/>
             </div>
@@ -43,15 +43,15 @@ const AboutPage = () => {
 
                  <div className='text-center bg-slate-300 rounded py-20 px-4 '>
                   <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>The HubSpot customer platform makes it easy for your entire company to work together — from marketing, to sales, to customer service. Each hub is powerful alone, but they're even better together.</p>
+                  <p className=' text-xl  text-sky-500'>But UniVerse is more than just functionality. We're also about fostering a strong and supportive community. We believe that connection is key to academic success, and our platform provides a space for students to share their experiences, offer advice, and celebrate each other's achievements. Whether you're struggling with a difficult concept or simply looking for a friendly chat, you'll always find a welcoming ear in the UniVerse community</p>
                  </div>
                  <div className='text-center bg-slate-300 rounded py-20 px-4 '>
                   <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>The HubSpot customer platform makes it easy for your entire company to work together — from marketing, to sales, to customer service. Each hub is powerful alone, but they're even better together.</p>
+                  <p className=' text-xl  text-sky-500'>Join us on this journey! Whether you're a seasoned student leader or a nervous freshman, UniVerse welcomes you with open arms. Together, we can create a brighter future for academic life, where stress is replaced by support, and every student has the chance to reach their full potential.</p>
                  </div>
                  <div className='text-center bg-slate-300 rounded py-20 px-4 '>
                   <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>The HubSpot customer platform makes it easy for your entire company to work together — from marketing, to sales, to customer service. Each hub is powerful alone, but they're even better together.</p>
+                  <p className=' text-xl  text-sky-500'>So, what are you waiting for? Explore UniVerse, share your voice, and become part of something bigger than yourself.</p>
                  </div>
                  <div className='text-center bg-slate-300 rounded py-20 px-4 '>
                   <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>

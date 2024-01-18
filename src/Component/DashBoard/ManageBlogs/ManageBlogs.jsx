@@ -17,7 +17,7 @@ const ManageBlogs = () => {
     useEffect(() => {
  
 
-        fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/blogs")
+        fetch("https://book-your-college-server-copy.vercel.app/blogs")
           .then((res) => res.json())
           .then((data) => {
             setLoading(false);
@@ -42,7 +42,7 @@ const ManageBlogs = () => {
           confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/blogs/${id}`, {
+            fetch(`https://book-your-college-server-copy.vercel.app/blogs/${id}`, {
               method: "DELETE",
             })
               .then((res) => res.json())

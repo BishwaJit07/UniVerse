@@ -17,7 +17,7 @@ const Blogs = () => {
   useEffect(() => {
  
 
-    fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/blogs")
+    fetch("https://book-your-college-server-copy.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
@@ -39,6 +39,7 @@ const Blogs = () => {
          <div className="text-center mb-12 mt-4">
         <p className="text-[48px] font-alice  dark:text-white">Our Latest Blogs </p>
         <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
+        <p className="dark:text-white">Beyond calculations and grades, UniVerse ignites your creativity and amplifies your unique voice through its powerful blog platform. Whether you're a seasoned writer or a budding storyteller,</p>
       
       </div>
           <div className="flex justify-between">

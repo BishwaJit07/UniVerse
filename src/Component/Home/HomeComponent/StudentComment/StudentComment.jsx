@@ -39,7 +39,7 @@ const StudentComment = () => {
         {/* Tropical Adventure */}
         <div>
           <h2 className=" text-4xl">
-            <span className="font-bold">Tropical Adventure </span> <br />
+            <span className="font-bold">UniVerse: Empowering Students </span> <br />
             for Students.
           </h2>
            <p className=" font-medium py-5">Student Tropical Vacation: Relax and Recharge</p>

@@ -27,7 +27,7 @@ const AddBlogs = () => {
             
             console.log({  finalData });
         
-            fetch('https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/blogs', {
+            fetch('https://book-your-college-server-copy.vercel.app/blogs', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

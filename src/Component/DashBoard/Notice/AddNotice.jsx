@@ -26,7 +26,7 @@ const AddNotice = () => {
             
             console.log({  finalData });
         
-            fetch('https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/notice', {
+            fetch('https://book-your-college-server-copy.vercel.app/notice', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

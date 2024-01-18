@@ -20,6 +20,8 @@ import AllUsers from '../Component/DashBoard/AllUsers/AllUsers';
 import AboutPage from '../Component/Aboutpage/AboutPage';
 import ForgetPass from '../Component/SignUp/ForgetPass';
 import ManageBlogs from '../Component/DashBoard/ManageBlogs/ManageBlogs';
+import EditBlogs from '../Component/Home/Blogs/EditBlogs';
+import EditNotice from '../Component/DashBoard/Notice/EditNotice';
 
 const router = createBrowserRouter([
 
@@ -78,6 +80,15 @@ const router = createBrowserRouter([
                            
                  
             },
+            {
+                   path:"/editblog/:id",
+                   element: <PrivateRoute>
+                    <EditBlogs/>
+                   </PrivateRoute>
+                           
+                 
+            },
+          
             
             {
                    path:"/about",
@@ -127,6 +138,14 @@ const router = createBrowserRouter([
                 
             }
             ,
+            {
+                path:"editnotice/:id",
+                element: 
+                 <EditNotice/>
+                
+                        
+              
+         },
             {
                 path:"alluser",
                 element: 

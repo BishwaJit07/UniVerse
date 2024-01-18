@@ -39,7 +39,7 @@ const SignIn = () => {
            
             
           };
-          fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/users", {
+          fetch("https://book-your-college-server-copy.vercel.app/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -13,7 +13,7 @@ const Notice = () => {
   useEffect(() => {
  
 
-    fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/notice")
+    fetch("https://book-your-college-server-copy.vercel.app/notice")
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);

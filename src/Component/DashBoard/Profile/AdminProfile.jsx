@@ -16,13 +16,10 @@ const AdminProfile = () => {
     e.preventDefault();
 
     try {
-      // Call the updateUser function from the context
+      
       await updateUser(newDisplayName);
-
-      // Reset state or perform any other necessary actions
       setEditing(false);
 
-      // Show success message with SweetAlert
       Swal.fire({
         icon: "success",
         title: "Updated Successfully",
@@ -31,7 +28,6 @@ const AdminProfile = () => {
     } catch (error) {
       console.error("Error updating display name:", error);
 
-      // Show error message with SweetAlert
       Swal.fire({
         icon: "error",
         title: "Update Failed",

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import {  AiOutlineDelete,} from 'react-icons/ai'
+import {  AiOutlineDelete, AiOutlineEdit,} from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 import line from "../../../assets/Img/line.png"
 
@@ -20,7 +20,7 @@ console.log(user?.email);
   useEffect(() => {
  
 
-    fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/blogs")
+    fetch("https://book-your-college-server-copy.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
@@ -45,7 +45,7 @@ console.log(user?.email);
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/blogs/${id}`, {
+        fetch(`https://book-your-college-server-copy.vercel.app/blogs/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -95,6 +95,7 @@ console.log(user?.email);
 <div className="divider"></div>
 <p>{blog?.details}</p>
 
+<div className="flex justify-around">
 <button
                       onClick={() => handleDelete(blog._id)}
                       className="bg-red-500 px-[12px] py-[10px] rounded-full tooltip"
@@ -102,6 +103,13 @@ console.log(user?.email);
                     >
                       <AiOutlineDelete className="text-white text-2xl  rounded-full " />
                     </button>
+
+                    <Link to={`/editblog/${blog._id}`} className="bg-yellow-500 px-[12px] py-[10px] rounded-full tooltip" data-tip="Edit Blog">
+  <AiOutlineEdit className="text-white text-2xl rounded-full" />
+</Link>
+
+</div>
+
 
 <div className="card-actions justify-end">
 

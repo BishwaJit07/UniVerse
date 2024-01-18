@@ -1,11 +1,12 @@
 
 import { useContext, useEffect, useState } from "react";
-import { AiOutlineDelete,} from 'react-icons/ai'
+import { AiOutlineDelete, AiOutlineEdit,} from 'react-icons/ai'
 
 import line from "../../../assets/Img/line.png"
 
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const MyNotice = () => {
     const [noticeData, setNoticeData] = useState([]);
@@ -20,7 +21,7 @@ const MyNotice = () => {
     useEffect(() => {
    
   
-      fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/notice")
+      fetch("https://book-your-college-server-copy.vercel.app/notice")
         .then((res) => res.json())
         .then((data) => {
           setLoading(false);
@@ -45,7 +46,7 @@ const MyNotice = () => {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/notice/${id}`, {
+          fetch(`https://book-your-college-server-copy.vercel.app/notice/${id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())
@@ -72,7 +73,7 @@ const MyNotice = () => {
   <div className='lg:m-5 flex flex-col justify-center items-center'>
            {/* title  */}
         <div className="text-center mb-12 mt-4">
-        <p className="text-[48px] font-alice  dark:text-white">Latest Notice </p>
+        <p className="text-[48px] font-alice  dark:text-white">My Notice </p>
         <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
       
       </div>
@@ -88,13 +89,19 @@ const MyNotice = () => {
     <h2 className="card-title">{notice.title}</h2>
     <div className="divider "></div>
     <p>{notice.details}</p>
+    <div className="flex justify-around">
     <button
                       onClick={() => handleDelete(notice._id)}
-                      className="bg-red-500 px-[12px] py-[10px] rounded-full tooltip"
+                      className="bg-red-500 mx-4 px-[12px] py-[10px] rounded-full tooltip"
                       data-tip="Delete Blog"
                     >
                       <AiOutlineDelete className="text-white text-2xl  rounded-full " />
                     </button>
+                    <Link     to={`/dashboard/editnotice/${notice._id}`} className="bg-yellow-500 px-[12px] py-[10px] rounded-full tooltip" data-tip="Edit Blog">
+  <AiOutlineEdit className="text-white text-2xl rounded-full" />
+</Link>
+    </div>
+
   </div>
             
 </div>

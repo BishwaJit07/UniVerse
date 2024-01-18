@@ -24,7 +24,7 @@ const Header = () => {
       useEffect(() => {
  
 
-        fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/users")
+        fetch("https://book-your-college-server-copy.vercel.app/users")
           .then((res) => res.json())
           .then((data) => {
             setLoading(false);

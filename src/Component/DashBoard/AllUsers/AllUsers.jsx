@@ -1,53 +1,96 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import line from '../../../assets/Img/line.png'
+import { AuthContext } from '../../../Providers/AuthProvider';
 const AllUsers = () => {
-    const [userData, serUserData] = useState([]);
+  const {user} = useContext(AuthContext);
+console.log(user.email);
+    const [userData, setUserData] = useState([]);
     console.log(userData);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/users")
+        fetch("https://book-your-college-server-copy.vercel.app/users")
           .then((res) => res.json())
           .then((data) => {
             setLoading(false);
-            serUserData(data);
+            setUserData(data);
           })
           .catch((error) => {
             console.error('Error fetching blog data:', error);
             setLoading(false);
             // Handle the error or set userData to a default value (e.g., [])
-            serUserData([]);
+            setUserData([]);
           });
       }, []);
      
 
-      const handleAdmin = (user) => {
-        fetch(`https://univer-city-server-nupttm57t-bishwajitr69-gmailcom.vercel.app/users/admin/${user._id}`, {
+      const handleAdmin = (ListUser) => {
+        fetch(`https://book-your-college-server-copy.vercel.app/users/admin/${ListUser._id}`, {
           method: "PATCH",
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: ListUser._id,
+            role: "admin", 
+          }),
         })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            if (data.modifiedCount) {
-                location.reload();
+          (data.modifiedCount) 
+             
     
               Swal.fire({
                 title: "Sweet!",
-                text: `${user.name} is Now Admin`,
+                text: `${ListUser.name} is Now Admin`,
                 imageUrl:
                   "https://png.pngtree.com/png-vector/20190301/ourmid/pngtree-vector-administration-icon-png-image_747092.jpg",
                 imageWidth: 200,
                 imageHeight: 200,
                 imageAlt: "Custom image",
               });
-            }
+
+              location.reload();
+            
           });
       };
 
-    
+      const handleRemoveAdmin = (ListUser) => {
+        fetch(`https://book-your-college-server-copy.vercel.app/users/removeadmin/${ListUser._id}`, {
+          method: "PUT",
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: ListUser._id,
+            role: "user", 
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+             (data.modifiedCount ) 
+      
+              Swal.fire({
+                title: "Sweet!",
+                text: `${ListUser.name} is No Longer Admin`,
+                imageUrl:
+                  "https://png.pngtree.com/png-vector/20190301/ourmid/pngtree-vector-administration-icon-png-image_747092.jpg",
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: "Custom image",
+              });
+              location.reload();
+            
+          })
+          .catch((error) => {
+            console.error('Error updating user roles:', error);
+          });
+      };
       
     return (
         <div>
@@ -69,25 +112,43 @@ const AllUsers = () => {
     </thead>
     <tbody>
     
-    {userData.map((user,index) => (
-            <tr key={user._id}>
+    {userData.map((ListUser,index) => (
+            <tr key={ListUser._id}>
             <th className='hidden md:inline'>{index+1}</th>
-            <td className='hidden md:inline'>{user?.name}</td>
-            <td>{user?.email}</td>
+            <td className='hidden md:inline'>{ListUser?.name}</td>
+            <td>{ListUser?.email}</td>
             <td>
-                    {user.role === "admin" ? (
+                    {ListUser?.role === "admin" ? (
                       <p className="text-black bg-gray-100 btn" disabled>
-                       {user.role}
+                       {ListUser.role}
                       </p>
                     ) : (
                      
-                        <p  onClick={() => handleAdmin(user)} className="text-black bg-gray-100 btn " >Make Admin</p>
+                        <p  onClick={() => handleAdmin(ListUser)} className="text-black bg-gray-100 btn " >Make Admin</p>
                       
                     )}
                   </td>
-                  <td>
-                
+            <td>
+            
+
+{
+  
+     
+      <div key={user._id}>
+      {ListUser.role === "admin" ? (
+  <p  className="text-white bg-red-500 btn" onClick={() => handleRemoveAdmin(ListUser)}>
+  Remove Admin
+  </p>
+) : (
+ 
+    <></>
+  
+)}
+  </div>
+
+  }
                   </td>
+               
           </tr>
         ))}
    
