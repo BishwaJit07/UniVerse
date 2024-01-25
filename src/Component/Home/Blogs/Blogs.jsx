@@ -4,32 +4,19 @@ import { Link } from 'react-router-dom';
 import line from "../../../assets/Img/line.png"
 import { CiCirclePlus } from "react-icons/ci";
 import { LiaBlogSolid } from "react-icons/lia";
+import CGPACalculator from "../../CalculateCgpa/Cgpa";
+import UseBlogs from "../../../hooks/UseBlogs";
 
 const Blogs = () => {
-
-  const [blogData, setBlogData] = useState([]);
-  console.log(blogData);
+  const {blogs,refetch} = UseBlogs();
+ 
+  
   const [loading, setLoading] = useState(true);
 
 
 
-  // fetch Blog data
-  useEffect(() => {
- 
 
-    fetch("https://book-your-college-server-copy.vercel.app/blogs")
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setBlogData(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching blog data:', error);
-        setLoading(false);
-        // Handle the error or set blogData to a default value (e.g., [])
-        setBlogData([]);
-      });
-  }, []);
+
 
     return (
       <div >
@@ -47,7 +34,7 @@ const Blogs = () => {
           <Link to='/myblogs'  className=' m-4  btn glass bg-red-600'><LiaBlogSolid className="text-white text-2xl"/> Your Blog</Link>
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '>
-          {blogData.map((blog) => (
+          {blogs.map((blog) => (
 
 
 <div key={blog._id} className=" c border-sky-500 card w-96 bg-white shadow-xl ">
@@ -67,10 +54,15 @@ const Blogs = () => {
 </div>
 </div>
           ))}
+
+
+          
          
       </div>
   
         </div>
+
+       
       </div>
        
     );

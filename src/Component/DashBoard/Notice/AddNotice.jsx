@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -8,58 +8,83 @@ const AddNotice = () => {
     const { user } = useContext(AuthContext);
     const {register, handleSubmit} = useForm();
     const navigate = useNavigate();
+    const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+    console.log(image_hosting_key);
+     const [imgUrl,setImgUrl] =useState()
+    const image_hosting_api = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
 
-    const onSubmit = (noticeData) => {
-        
-        
-        console.log(noticeData,user)
-
-            const finalData = {
-              title: noticeData.title,
-              details: noticeData.details,
-               img:noticeData.img,
-              
-              name:user.displayName,
-              email: user.email,
-              
-            };
-            
-            console.log({  finalData });
-        
-            fetch('https://book-your-college-server-copy.vercel.app/notice', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(finalData),
-              })
-                .then((response) => {
-                  return response.json();
-                })
-                .then((data) => {
-                  console.log(data);
-            
-                  if (data.acknowledged) {
-                    Swal.fire({
+    const onSubmit = async (noticeData, user) => {
+      try {
+          console.log(noticeData, user);
+  
+          // Step 1: Upload image to ImgBB
+          const formData = new FormData();
+          formData.append("image", noticeData.img[0]);
+         
+  
+          fetch(image_hosting_api, {
+              method: 'POST',
+              body: formData,
+          })
+          .then(res=>res.json())
+          .then(imgRes=>{
+            if(imgRes.success){
+              const imgUrl = imgRes.data.display_url;
+              setImgUrl(imgUrl)
+            }
+            console.log(imgRes.data.display_url);
+          })
+  
+  
+          if (imgUrl) {
+              // Step 2: If upload successful, construct final data including image URL
+              const finalData = {
+                  title: noticeData.title,
+                  details: noticeData.details,
+                  img: imgUrl,
+                  name: user.displayName,
+                  email: user.email,
+              };
+  
+              console.log("Final data:", finalData);
+  
+              // Step 3: Post notice data along with image URL
+              const postResponse = await fetch('https://book-your-college-server-copy.vercel.app/notice', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(finalData),
+              });
+  
+              const postData = await postResponse.json();
+              console.log("Post response:", postData);
+  
+              if (postData.acknowledged) {
+                  Swal.fire({
                       position: 'center',
                       icon: 'success',
                       title: 'Notice Published',
                       showConfirmButton: false,
                       timer: 1500,
-                    });
-                    navigate('/allnotice');
-                  } else {
-                    Swal.fire({
+                  });
+                  navigate('/allnotice');
+              } else {
+                  Swal.fire({
                       position: 'center',
                       icon: 'error',
                       title: 'Failed to add a Notice',
                       showConfirmButton: false,
                       timer: 1500,
-                    });
-                  }
-                })
-                .catch((error) => console.error(error));
-            };
+                  });
+              }
+          } else {
+              console.error("Failed to upload image to ImgBB");
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  };
             
     return (
         <div>
@@ -82,14 +107,14 @@ const AddNotice = () => {
 
   {/* input field */}
   <div className='m-4 md:mr-2 md:mb-0'>
-          <label htmlFor="img" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Image Link</label>
-          <input {...register('img', {required: true})} type="text" id="img" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline"placeholder="post img in imgbb anf hare link here" />
+          <label htmlFor="img" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Upload Image</label>
+          <input {...register('img', { required: true })} type="file" className="file-input w-full max-w-xs" />
         </div>
 
         {/* input field */}
         <div className='m-4 md:mr-2 md:mb-0'>
           <label htmlFor="description" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Description</label>
-          <textarea {...register('details', {required: true})} id="description" rows="4" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Write the notice here..."></textarea>
+          <textarea {...register('details')} id="description" rows="4" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Write the notice here..."></textarea>
         </div>
         <button className='text-[20px] font-bold w-[50%] mx-auto bg-blue-500 rounded-full text-white py-[13px]  flex justify-center items-center '>Done</button>
         </form>

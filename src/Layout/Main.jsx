@@ -7,10 +7,10 @@ const Main = () => {
     return (
         <div >
             <Header/>
-            <div className="flex-grow max-w-screen-xl mx-auto">
+            {/* <div className="flex-grow max-w-screen-xl mx-auto">
+            
+            </div> */}
             <Outlet/>
-            </div>
-           
             <Fotter/>
         </div>
     );

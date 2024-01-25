@@ -77,7 +77,7 @@ const AdminProfile = () => {
           ) : (
             <div className="my-2 space-y-1">
               <div className="flex justify-between">
-           <h2 className="text-xl font-semibold sm:text-2xl text-gray-300 ">
+           <h2 className="px-2 text-xs sm:text-base dark:text-gray-400">
                  <span className="px-2 text-xs sm:text-base dark:text-gray-400"> Name:</span> {user?.displayName}
                 </h2>
                 <div className="flex justify-end pt-2 space-x-4 align-center">

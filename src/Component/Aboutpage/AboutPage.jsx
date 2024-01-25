@@ -2,13 +2,18 @@ import React from 'react';
 import line from "../../assets/Img/line.png"
 import aboutimg from "../../assets/Img/aboutimg.png"
 import { FcCustomerSupport } from 'react-icons/fc';
+import { Link } from 'react-router-dom';
+import stu1 from '../../assets/Img/stu1.png'
+import stu2 from '../../assets/Img/stu2.png'
+import stu3 from '../../assets/Img/stu3.png'
+import stu4 from '../../assets/Img/stu4.png'
 
 const AboutPage = () => {
     return (
-        <div className='m-4'>
+        <div className="flex-grow max-w-screen-xl mx-4 lg:mx-auto">
 
                  {/* title  */}
-          <div className="text-center mb-12 mt-4">
+          <div className="text-center mb-12  mt-4">
         <p className="text-[48px] font-alice  dark:text-white">About Us </p>
         <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
         </div>
@@ -37,38 +42,84 @@ const AboutPage = () => {
             </div>
             
 
-            {/* cards  */}
+       
 
-            <div className='m-4 grid grid-cols-1 md:grid-cols-3 gap-4'>
+{/* team member */}
 
-                 <div className='text-center bg-slate-300 rounded py-20 px-4 '>
-                  <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>But UniVerse is more than just functionality. We're also about fostering a strong and supportive community. We believe that connection is key to academic success, and our platform provides a space for students to share their experiences, offer advice, and celebrate each other's achievements. Whether you're struggling with a difficult concept or simply looking for a friendly chat, you'll always find a welcoming ear in the UniVerse community</p>
-                 </div>
-                 <div className='text-center bg-slate-300 rounded py-20 px-4 '>
-                  <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>Join us on this journey! Whether you're a seasoned student leader or a nervous freshman, UniVerse welcomes you with open arms. Together, we can create a brighter future for academic life, where stress is replaced by support, and every student has the chance to reach their full potential.</p>
-                 </div>
-                 <div className='text-center bg-slate-300 rounded py-20 px-4 '>
-                  <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>So, what are you waiting for? Explore UniVerse, share your voice, and become part of something bigger than yourself.</p>
-                 </div>
-                 <div className='text-center bg-slate-300 rounded py-20 px-4 '>
-                  <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>The HubSpot customer platform makes it easy for your entire company to work together — from marketing, to sales, to customer service. Each hub is powerful alone, but they're even better together.</p>
-                 </div>
-                 <div className='text-center bg-slate-300 rounded py-20 px-4 '>
-                  <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>The HubSpot customer platform makes it easy for your entire company to work together — from marketing, to sales, to customer service. Each hub is powerful alone, but they're even better together.</p>
-                 </div>
-                 <div className='text-center bg-slate-300 rounded py-20 px-4 '>
-                  <h2 className='font-bold text-xl  text-red-500  flex justify-center'> <FcCustomerSupport className='text-4xl mx-2'/> Our Customer Platform</h2>
-                  <p className=' text-xl  text-sky-500'>The HubSpot customer platform makes it easy for your entire company to work together — from marketing, to sales, to customer service. Each hub is powerful alone, but they're even better together.</p>
-                 </div>
-               
+         {/* title  */}
+         <div className="text-center mb-12 mt-4">
+        <p className="text-[48px] font-alice  dark:text-white">Our Team </p>
+        <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
+        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-7 justify-center  max-w-7xl mx-auto mb-12">
+
+{/* card 1*/}
+
+  <div  className="bg-white shadow rounded my-3 overflow-hidden group relative w-80 h-80 mx-auto">
+    <img className="w-full h-60 object-cover group-hover:scale-110  duration-700" src={stu1} alt="" />
+    <div className="h-[100px]"></div>
+    <div className="absolute bottom-[30px] group-hover:mb-[65px] duration-700 text-center z-10 inset-x-0 ">
+      <p className="text-xl  font-bold text-[#5A4F24] group-hover:text-[#ffc107] ">Hifjur Rahman Bayezid
+</p>
+      <p className="text-sm group-hover:text-white dark:text-black">batch -53 sec B
+</p>
+    </div>
+
+    <div className=" bg-gradient-to-b from-[#2a262691] to-[#2a2c3c]  rounded-t-[40px] duration-700 absolute group-hover:h-[180px] h-0 group-hover:w-full w-0 group-hover:bottom-0 right-0">
+    </div>
+  </div>
+{/* card 2*/}
+
+  <div  className="bg-white shadow rounded my-3 overflow-hidden group relative w-80 h-80 mx-auto">
+    <img className="w-full h-60 object-cover group-hover:scale-110  duration-700" src={stu2} alt="" />
+    <div className="h-[100px]"></div>
+    <div className="absolute bottom-[30px] group-hover:mb-[65px] duration-700 text-center z-10 inset-x-0 ">
+      <p className="text-xl  font-bold text-[#5A4F24] group-hover:text-[#ffc107] ">Redwon Ahmed </p>
+      <p className="text-sm group-hover:text-white dark:text-black">batch -53 sec B
+</p>
+    </div>
+
+    <div className=" bg-gradient-to-b from-[#2a262691] to-[#2a2c3c]  rounded-t-[40px] duration-700 absolute group-hover:h-[180px] h-0 group-hover:w-full w-0 group-hover:bottom-0 right-0">
+    </div>
+  </div>
+{/* card 3*/}
+
+  <div  className="bg-white shadow rounded my-3 overflow-hidden group relative w-80 h-80 mx-auto">
+    <img className="w-full h-60 object-cover group-hover:scale-110  duration-700" src={stu3} alt="" />
+    <div className="h-[100px]"></div>
+    <div className="absolute bottom-[30px] group-hover:mb-[65px] duration-700 text-center z-10 inset-x-0 ">
+      <p className="text-xl  font-bold text-[#5A4F24] group-hover:text-[#ffc107] "> Md. Adibur Rahman</p>
+      <p className="text-sm group-hover:text-white dark:text-black">Batch -53 sec B
+</p>
+    </div>
+
+    <div className=" bg-gradient-to-b from-[#2a262691] to-[#2a2c3c]  rounded-t-[40px] duration-700 absolute group-hover:h-[180px] h-0 group-hover:w-full w-0 group-hover:bottom-0 right-0">
+    </div>
+  </div>
+
+{/* card 4*/}
+
+  <div  className="bg-white shadow rounded my-3 overflow-hidden group relative w-80 h-80 mx-auto">
+    <img className="w-full h-60 object-cover group-hover:scale-110  duration-700" src={stu4} alt="" />
+    <div className="h-[100px]"></div>
+    <div className="absolute bottom-[30px] group-hover:mb-[65px] duration-700 text-center z-10 inset-x-0 ">
+      <p className="text-xl  font-bold text-[#5A4F24] group-hover:text-[#ffc107] ">Mirza Lutfur Ali Rafi 
+</p>
+      <p className="text-sm group-hover:text-white dark:text-black">batch -53 sec B
+</p>
+    </div>
+
+    <div className=" bg-gradient-to-b from-[#2a262691] to-[#2a2c3c]  rounded-t-[40px] duration-700 absolute group-hover:h-[180px] h-0 group-hover:w-full w-0 group-hover:bottom-0 right-0">
+    </div>
+  </div>
 
 
-            </div>
+
+</div>
+
+
+
+
         </div>
 
       

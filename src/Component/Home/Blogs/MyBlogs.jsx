@@ -5,34 +5,17 @@ import line from "../../../assets/Img/line.png"
 
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import UseBlogs from "../../../hooks/UseBlogs";
 
 const MyBlogs = () => {
 
-  const [blogData, setBlogData] = useState([]);
-  console.log(blogData);
   const [loading, setLoading] = useState(true);
 
   const {user} = useContext(AuthContext);
 
 console.log(user?.email);
 
-  // fetch Blog data
-  useEffect(() => {
- 
-
-    fetch("https://book-your-college-server-copy.vercel.app/blogs")
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setBlogData(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching blog data:', error);
-        setLoading(false);
-        // Handle the error or set blogData to a default value (e.g., [])
-        setBlogData([]);
-      });
-  }, []);
+const {blogs,refetch} = UseBlogs();
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -84,7 +67,7 @@ console.log(user?.email);
           <Link to='/blogs'  className=' m-4  btn glass bg-red-600'> Your Blog</Link>
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  '>
-          {blogData.map((blog) => {
+          {blogs.map((blog) => {
  if (blog?.email === user?.email) {
     console.log(blog);
     return (

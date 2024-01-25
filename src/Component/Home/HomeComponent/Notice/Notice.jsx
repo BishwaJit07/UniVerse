@@ -27,8 +27,8 @@ const Notice = () => {
       });
   }, []);
     return (
-        <div className="my-4 bg-red-200 flex text-black">
-          <p className="bg-red-500 text-lg text-white p-2 rounded">  Notice:</p>
+        <div className="  bg-red-200 flex text-black">
+          <p className="bg-red-500 text-xs text-white p-2 rounded">Latest Notice:</p>
           
               <Marquee >{noticeData.map((notice) => ( 
    <Link to='/allnotice' key={notice._id} className="mx-4 flex items-center "> <BsArrowBarLeft /><span className="mx-2">{notice?.title}</span></Link>

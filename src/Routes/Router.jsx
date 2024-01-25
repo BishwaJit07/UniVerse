@@ -5,12 +5,10 @@ import Home from '../Component/Home/Home';
 import Login from '../Component/SignUp/Login';
 import SignIn from '../Component/SignUp/SignIn';
 import Blogs from '../Component/Home/Blogs/Blogs';
-import Cgpa from '../Component/CalculateCgpa/Cgpa';
 import AddBlogs from '../Component/Home/Blogs/AddBlogs';
 import PrivateRoute from './PrivateRoute';
 import Verify from '../Component/Verifypage/Verify';
 import DashBoard from '../Component/DashBoard/DashBoard';
-
 import AddNotice from '../Component/DashBoard/Notice/AddNotice';
 import AllNoticeCard from '../Component/Home/HomeComponent/Notice/AllNoticeCard';
 import AdminProfile from '../Component/DashBoard/Profile/AdminProfile';
@@ -22,6 +20,7 @@ import ForgetPass from '../Component/SignUp/ForgetPass';
 import ManageBlogs from '../Component/DashBoard/ManageBlogs/ManageBlogs';
 import EditBlogs from '../Component/Home/Blogs/EditBlogs';
 import EditNotice from '../Component/DashBoard/Notice/EditNotice';
+import CgpaText from '../Component/CalculateCgpa/CgpaText';
 
 const router = createBrowserRouter([
 
@@ -51,7 +50,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"Cgpa",
-                element:<Cgpa/>
+                element:<CgpaText/>
             },
             {
                 path:"verify",

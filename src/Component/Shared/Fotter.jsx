@@ -36,7 +36,7 @@ const Fotter = () => {
   <nav className="grid grid-flow-col gap-4">
     <Link to='/about'>About us</Link> 
     
-    <Link to='/allnotice'>notice</Link> 
+    <Link to='/allnotice'>Notice</Link> 
     <Link to='/blogs'>Blogs</Link>
   </nav> 
   <nav>

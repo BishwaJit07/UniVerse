@@ -32,7 +32,7 @@ const AllNoticeCard = () => {
       </div>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
           {noticeData.map((notice) => (
-          <div  key={notice._id} className="card w-96 bg-blue-800 text-white glass">
+          <div  key={notice._id} className="card w-96 bg-blue-800 text-white ">
            
   <div className="card-body items-center text-center">
   <figure><img src={notice?.img} className="w-full h-60 lg:h-80" alt="img" /></figure>

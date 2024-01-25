@@ -106,7 +106,7 @@ console.log(user.email);
       <tr>
         <th className='hidden md:inline'></th>
         <th className='hidden md:inline'>Name</th>
-        <th>Job</th>
+        <th>Email</th>
         <th>Role</th>
       </tr>
     </thead>
@@ -135,7 +135,7 @@ console.log(user.email);
   
      
       <div key={user._id}>
-      {ListUser.role === "admin" ? (
+      {user.email === "cse_2012020090@lus.ac.bd" ? (
   <p  className="text-white bg-red-500 btn" onClick={() => handleRemoveAdmin(ListUser)}>
   Remove Admin
   </p>

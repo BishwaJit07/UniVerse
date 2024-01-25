@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import line from "../../../assets/Img/line.png"
 import { useForm } from 'react-hook-form';
@@ -9,15 +9,41 @@ const AddBlogs = () => {
     const { user } = useContext(AuthContext);
     const {register, handleSubmit} = useForm();
     const navigate = useNavigate();
+    const [imgUrl,setImgUrl] =useState();
+    const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+    const image_hosting_api = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
+
     const onSubmit = (blogData) => {
         
-        
+      try {
+        console.log(blogData, user);
+
+        // Step 1: Upload image to ImgBB
+        const formData = new FormData();
+        formData.append("image", blogData.img[0]);
+       
+
+        fetch(image_hosting_api, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(res=>res.json())
+        .then(imgRes=>{
+          if(imgRes.success){
+            const imgUrl = imgRes.data.display_url;
+            setImgUrl(imgUrl)
+          }
+          console.log(imgRes.data.display_url);
+        })
+
+
+        if (imgUrl) {
         console.log(blogData,user)
 
             const finalData = {
               title: blogData.title,
               details: blogData.details,
-              img:blogData.img,
+              img:imgUrl,
               react: 0,
               name:user.displayName,
               email: user.email,
@@ -60,8 +86,10 @@ const AddBlogs = () => {
                   }
                 })
                 .catch((error) => console.error(error));
-            };
-        
+            }
+          } catch (error) {
+            console.error(error);
+        }}
 
     return (
         <div>
@@ -82,8 +110,8 @@ const AddBlogs = () => {
 
   {/* input field */}
         <div className='m-4 md:mr-2 md:mb-0'>
-          <label htmlFor="img" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Image Link</label>
-          <input {...register('img', {required: true})} type="text" id="img" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline "placeholder="post img in imgbb and paste link here" />
+          <label htmlFor="img" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Upload Image</label>
+         < input {...register('img', { required: true })} type="file" className="file-input w-full max-w-xs" />
         </div>
 
         {/* input field */}

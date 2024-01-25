@@ -21,7 +21,7 @@ export default function ImgSlider() {
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
   return (
-    <>
+    <div className=''>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -50,6 +50,6 @@ export default function ImgSlider() {
           <span ref={progressContent}></span>
         </div>
       </Swiper>
-    </>
+    </div>
   );
 }

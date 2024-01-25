@@ -18,10 +18,10 @@ const Home = () => {
             <StudentComment/>
            
   {/* title  */}
-  <div className="text-center mb-12 mt-4">
+  <div className="text-center mx-4 lg:mx-0 mb-12  mt-4">
         <p className="text-[48px] font-alice  dark:text-white">Calculate CGPA </p>
         <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
-        <p className="text-[18px] font-lato  dark:text-gray-200">Say goodbye to the days of tedious calculations and messy spreadsheets! UniVerse takes the hassle out of monitoring your academic progress with its lightning-fast CGPA calculation tool. Simply input your grades and credits, and watch as UniVerse instantly delivers your accurate CGPA, saving you precious time and stress. <Link to='/cgpa' className=' text-blue-600 hover:underline'>Learn More</Link></p>
+        <p className="text-[18px] font-lato  dark:text-gray-200">Say goodbye to the days of tedious calculations and messy spreadsheets! UniVerse takes the hassle out of monitoring your academic progress with its lightning-fast CGPA calculation tool. Simply input your grades and credits, and watch as UniVerse instantly delivers your accurate CGPA, saving you precious time and stress. <Link to='/cgpa' className=' text-blue-600 hover:underline'> Calculate Your CGPA</Link></p>
         </div>
 {/* <Card/> */}
             <Gallery/>
