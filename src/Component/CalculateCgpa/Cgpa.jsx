@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import line from "../../assets/Img/line.png";
-
+import * as XLSX from "xlsx";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import Swal from "sweetalert2";
-import { useReactToPrint } from "react-to-print";
+
 import {
   FaCalculator,
   FaMinusCircle,
@@ -16,20 +16,14 @@ function CGPACalculator() {
 
 
 
-  const conponentPDF = useRef();
 
-  const generatePDF = useReactToPrint({
-    content: () => conponentPDF.current,
-    documentTitle: "Userdata",
-    onAfterPrint: () => alert("Data saved in PDF"),
-  });
 
   const [overallYearCGPA, setOverallYearCGPA] = useState(null);
 
   const [yearData, setYearData] = useState([
-    { pointCreditPairs: [{ point: "", credit: "" }], calculatedCGPA: null },
+    { pointCreditPairs: [{ name: "", point: "", credit: "" }], calculatedCGPA: null },
   ]);
-
+console.log(yearData);
   const addInputField = (yearIndex) => {
     const newYearData = [...yearData];
     newYearData[yearIndex].pointCreditPairs.push({ point: "", credit: "" });
@@ -159,10 +153,38 @@ function CGPACalculator() {
     setOverallYearCGPA(overallCGPA);
   };
 
+  const exportToExcel = () => {
+    const wb = XLSX.utils.book_new();
+    const wsData = [];
+    
+    yearData.forEach((year, yearIndex) => {
+        wsData.push([`Semester ${yearIndex + 1}`,"", "Sub", "Point", "Credit", ""]);
+        year.pointCreditPairs.forEach(pair => {
+            wsData.push(["","", pair.name, pair.point, pair.credit, ""]);
+        });
+        wsData.push(["", "", "", "", `CGPA: ${year.calculatedCGPA ? year.calculatedCGPA.toFixed(2) : ""}`]);
+        
+    });
+    wsData.push([ "", "", overallYearCGPA ? `Overall CGPA: ${overallYearCGPA.toFixed(2)}` : " "]);
+
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    XLSX.utils.book_append_sheet(wb, ws, "CGPA Data");
+    XLSX.writeFile(wb, "cgpa_data.xlsx");
+};
+
+
+
+ 
+
+ 
+
+  
+  
+  
   return (
     <div >
      
-      <div ref={conponentPDF} style={{ width: "100%" }}>
+      <div >
         <div className="text-center mb-12 mt-4">
           <p className="text-[48px] font-alice  dark:text-white">
             Calculate CGPA{" "}
@@ -187,6 +209,15 @@ function CGPACalculator() {
                       type="text"
                       placeholder={`Enter Sub Name`}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg input-info  block  p-2.5 w-full max-w-xs m-4"
+                      value={pair.name}
+                      onChange={(e) =>
+                        handleInputChange(
+                          yearIndex,
+                          pairIndex,
+                          "name",
+                          e.target.value
+                        )
+                      }
                     />
                     {/* <input
                       type="number"
@@ -323,7 +354,7 @@ function CGPACalculator() {
             <FaMinusCircle />
             remove Semester
           </button>
-          <button className="btn bg-red-700 m-2" onClick={generatePDF}>
+          <button className="btn bg-red-700 m-2" onClick={exportToExcel}>
             <FaPrint className="text-white" />
           </button>
         </>
