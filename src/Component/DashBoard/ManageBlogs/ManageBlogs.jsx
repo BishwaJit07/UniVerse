@@ -1,35 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../Providers/AuthProvider';
+import parse from 'html-react-parser';
 import {  AiOutlineDelete,} from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 import line from "../../../assets/Img/line.png"
 import Swal from 'sweetalert2';
+import UseBlogs from '../../../hooks/UseBlogs';
 
 
 const ManageBlogs = () => {
-    const [blogData, setBlogData] = useState([]);
-  console.log(blogData);
-  const [loading, setLoading] = useState(true);
-
  
+    const {blogs,refetch} = UseBlogs();
 
-    // fetch Blog data
-    useEffect(() => {
- 
 
-        fetch("https://book-your-college-server-copy.vercel.app/blogs")
-          .then((res) => res.json())
-          .then((data) => {
-            setLoading(false);
-            setBlogData(data);
-          })
-          .catch((error) => {
-            console.error('Error fetching blog data:', error);
-            setLoading(false);
-            // Handle the error or set blogData to a default value (e.g., [])
-            setBlogData([]);
-          });
-      }, []);
 
       const handleDelete = (id) => {
         Swal.fire({
@@ -57,7 +38,7 @@ const ManageBlogs = () => {
                       popup: "animate__animated animate__fadeOutUp",
                     },
                   });
-                  location.reload();
+                  refetch()
                 }
               })
               .catch((error) => console.log(error));
@@ -76,7 +57,7 @@ const ManageBlogs = () => {
       </div>
          
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '>
-          {blogData.map((blog) => (
+          {blogs.map((blog) => (
 
 
 <div key={blog._id} className=" c border-sky-500 card w-96 bg-white shadow-xl ">
@@ -89,7 +70,7 @@ const ManageBlogs = () => {
     {blog?.title}
   </h2>
   <div className="border-y-2 "></div>
-  <p className="text-black">{blog.details}</p>
+  <p className="text-black">{parse(blog.details)}</p>
   <div className="card-actions justify-between">
   <div className="badge badge-secondary">{blog?.name}</div>
   <button

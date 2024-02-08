@@ -1,19 +1,22 @@
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../../Providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import JoditEditor from 'jodit-react';
+
 import line from "../../../assets/Img/line.png"
+import { AuthContext } from '../../../Providers/AuthProvider';
 const AddNotice = () => {
     const { user } = useContext(AuthContext);
-    const {register, handleSubmit} = useForm();
+    const [descriptionValue, setDescriptionValue] = useState("");
+    const {register, handleSubmit,formState: { errors }} = useForm();
     const navigate = useNavigate();
     const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
     console.log(image_hosting_key);
      const [imgUrl,setImgUrl] =useState()
     const image_hosting_api = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
 
-    const onSubmit = async (noticeData, user) => {
+    const onSubmit = async (noticeData) => {
       try {
           console.log(noticeData, user);
   
@@ -40,7 +43,7 @@ const AddNotice = () => {
               // Step 2: If upload successful, construct final data including image URL
               const finalData = {
                   title: noticeData.title,
-                  details: noticeData.details,
+                  details: descriptionValue,
                   img: imgUrl,
                   name: user.displayName,
                   email: user.email,
@@ -103,18 +106,31 @@ const AddNotice = () => {
         <div className='m-4 md:mr-2 md:mb-0'>
           <label htmlFor="blog_title" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Notice Tittle</label>
           <input {...register('title', {required: true})} type="text" id="blog_title" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline"placeholder="Type Notice title" />
+          {errors.title && (
+            <span className="text-red-600  rounded-sm ">This field is required</span>
+          )}
         </div>
 
   {/* input field */}
   <div className='m-4 md:mr-2 md:mb-0'>
           <label htmlFor="img" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Upload Image</label>
-          <input {...register('img', { required: true })} type="file" className="file-input w-full max-w-xs" />
+          <input {...register('img', { required: true })} type="file" className="file-input w-full max-w-xs" /> <br />
+          {errors.title && (
+            <span className="text-red-600  rounded-sm ">This field is required</span>
+          )}
         </div>
 
         {/* input field */}
         <div className='m-4 md:mr-2 md:mb-0'>
           <label htmlFor="description" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Description</label>
-          <textarea {...register('details')} id="description" rows="4" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Write the notice here..."></textarea>
+          <JoditEditor
+    value={descriptionValue}
+    onChange={(newContent) => setDescriptionValue(newContent)}
+    tabIndex={1}
+  /><br />
+          {errors.title && (
+            <span className="text-red-600  rounded-sm ">This field is required</span>
+          )}
         </div>
         <button className='text-[20px] font-bold w-[50%] mx-auto bg-blue-500 rounded-full text-white py-[13px]  flex justify-center items-center '>Done</button>
         </form>

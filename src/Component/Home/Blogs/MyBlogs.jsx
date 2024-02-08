@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, } from "react";
 import {  AiOutlineDelete, AiOutlineEdit,} from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 import line from "../../../assets/Img/line.png"
+import parse from 'html-react-parser';
 
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
@@ -9,7 +10,7 @@ import UseBlogs from "../../../hooks/UseBlogs";
 
 const MyBlogs = () => {
 
-  const [loading, setLoading] = useState(true);
+  
 
   const {user} = useContext(AuthContext);
 
@@ -76,7 +77,7 @@ const {blogs,refetch} = UseBlogs();
 <div className="card-body items-center text-center">
 <h2 className="card-title ">{blog?.title}</h2>
 <div className="divider"></div>
-<p>{blog?.details}</p>
+<p>{parse(blog?.details)}</p>
 
 <div className="flex justify-around">
 <button

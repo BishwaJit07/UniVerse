@@ -8,7 +8,7 @@
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #ffffff00;
+    background: #fff;
   
     /* Center slide text vertically */
     display: flex;
@@ -16,18 +16,17 @@
     align-items: center;
   }
   
-  #cardImg {
+  .swiper-slide img {
     display: block;
     width: 360px;
-  
+    height: 320px;
     object-fit: cover;
   }
   
   .swiper {
     width: 100%;
     height: 100%;
-   
-   border-radius: 4px;
+    margin: 20px auto;
   }
   
   

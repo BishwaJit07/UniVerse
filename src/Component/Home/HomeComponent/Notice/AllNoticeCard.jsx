@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import line from "../../../../assets/Img/line.png"
+import parse from 'html-react-parser';
+import UseNotice from '../../../../hooks/UseNotice';
 const AllNoticeCard = () => {
-  const [noticeData, setNoticeData] = useState([]);
+  const {noticeData, refetch} = UseNotice();
+
     const [loading, setLoading] = useState(true);
     console.log(noticeData);
-    // fetch Notice data
-    useEffect(() => {
- 
-
-      fetch("https://book-your-college-server-copy.vercel.app/notice")
-        .then((res) => res.json())
-        .then((data) => {
-          setLoading(false);
-          setNoticeData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching blog data:', error);
-          setLoading(false);
-          // Handle the error or set noticeData to a default value (e.g., [])
-          setNoticeData([]);
-        });
-    }, []);
+   
     return (
         <div >
            <div className=' mb-4 lg:m-5 flex flex-col justify-center items-center'>
@@ -38,7 +25,7 @@ const AllNoticeCard = () => {
   <figure><img src={notice?.img} className="w-full h-60 lg:h-80" alt="img" /></figure>
     <h2 className="card-title">{notice.title}</h2>
     <div className="divider "></div>
-    <p>{notice.details}</p>
+    <p>{parse(notice.details)}</p>
    
   </div>
             

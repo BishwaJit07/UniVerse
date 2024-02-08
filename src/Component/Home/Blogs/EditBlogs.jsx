@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { AuthContext } from '../../../Providers/AuthProvider';
+import JoditEditor from 'jodit-react';
 import { useForm } from 'react-hook-form';
 import UseBlogs from '../../../hooks/UseBlogs';
 
@@ -11,7 +11,7 @@ import UseBlogs from '../../../hooks/UseBlogs';
 
 
 const EditBlogs = () => {
-
+  
     const { register, handleSubmit,  } = useForm();
     const navigate = useNavigate();
     const { id } = useParams();
@@ -19,14 +19,14 @@ const EditBlogs = () => {
 const {blogs,refetch} = UseBlogs();
 
 const blog = blogs.find((blog) => blog._id === id);
-
+const [descriptionValue, setDescriptionValue] = useState(blog?.details);
 console.log(blog);
   
     const onSubmit = (blogData) => {
       const finalData = {
         id: blog._id,
         title: blogData.title,
-        details: blogData.details,
+        details: descriptionValue,
         img: blogData.img,
         email: blog.email,
         name: blog.name,
@@ -67,7 +67,7 @@ console.log(blog);
         <div>
         {/* title  */}
    <div className="text-center mb-12 mt-4">
-   <p className="text-[48px] font-alice  dark:text-white">Add Blogs </p>
+   <p className="text-[48px] font-alice  dark:text-white">Edit Blogs </p>
    {/* <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" /> */}
  
  </div>
@@ -90,7 +90,12 @@ console.log(blog);
     {/* input field */}
     <div className='m-4 md:mr-2 md:mb-0'>
       <label htmlFor="description" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Description</label>
-      <textarea defaultValue={blog?.details} {...register('details', {required: true})} id="description" rows="4" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Write your thoughts here..."></textarea>
+      <JoditEditor defaultValue={blog?.details}
+    value={descriptionValue}
+    onChange={(newContent) => setDescriptionValue(newContent)}
+    tabIndex={1}
+  />
+      
     </div>
     <button className='text-[20px] font-bold w-[50%] mx-auto bg-blue-500 rounded-full text-white py-[13px]  flex justify-center items-center '>Done</button>
     </form>

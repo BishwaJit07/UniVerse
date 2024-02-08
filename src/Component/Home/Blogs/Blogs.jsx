@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-
+import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import line from "../../../assets/Img/line.png"
 import { CiCirclePlus } from "react-icons/ci";
 import { LiaBlogSolid } from "react-icons/lia";
-import CGPACalculator from "../../CalculateCgpa/Cgpa";
+
+
 import UseBlogs from "../../../hooks/UseBlogs";
 
 const Blogs = () => {
@@ -47,7 +48,7 @@ const Blogs = () => {
     {blog?.title}
   </h2>
   <div className="border-y-2 "></div>
-  <p className="text-black">{blog.details}</p>
+  <p className="text-black">{parse(blog.details)}</p>
   <div className="card-actions justify-end">
   <div className="badge badge-secondary">{blog?.name}</div>
   </div>

@@ -21,6 +21,8 @@ import ManageBlogs from '../Component/DashBoard/ManageBlogs/ManageBlogs';
 import EditBlogs from '../Component/Home/Blogs/EditBlogs';
 import EditNotice from '../Component/DashBoard/Notice/EditNotice';
 import CgpaText from '../Component/CalculateCgpa/CgpaText';
+import SingleNotice from '../Component/Home/HomeComponent/Notice/SingleNotice';
+import SingleBlogs from '../Component/Home/Blogs/SingleBlogs';
 
 const router = createBrowserRouter([
 
@@ -66,6 +68,10 @@ const router = createBrowserRouter([
                 element:<AllNoticeCard/>
             },
             {
+                path:"notice/:id",
+                element:<SingleNotice/>
+            },
+            {
                    path:"/addblog",
                    element: <PrivateRoute>
                            <AddBlogs/>
@@ -76,6 +82,12 @@ const router = createBrowserRouter([
                    element: <PrivateRoute>
                     <MyBlogs/>
                    </PrivateRoute>
+                           
+                 
+            },
+            {
+                   path:"/blog/:id",
+                   element: <SingleBlogs/>
                            
                  
             },

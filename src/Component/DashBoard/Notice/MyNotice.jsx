@@ -1,3 +1,4 @@
+import parse from 'html-react-parser';
 
 import { useContext, useEffect, useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit,} from 'react-icons/ai'
@@ -7,9 +8,11 @@ import line from "../../../assets/Img/line.png"
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
+import UseNotice from "../../../hooks/UseNotice";
 
 const MyNotice = () => {
-    const [noticeData, setNoticeData] = useState([]);
+  const {noticeData, refetch} = UseNotice();
+    // const [noticeData, setNoticeData] = useState([]);
     console.log(noticeData);
     const [loading, setLoading] = useState(true);
   
@@ -17,23 +20,23 @@ const MyNotice = () => {
   
   console.log(user?.email);
   
-    // fetch notice data
-    useEffect(() => {
+    // // fetch notice data
+    // useEffect(() => {
    
   
-      fetch("https://book-your-college-server-copy.vercel.app/notice")
-        .then((res) => res.json())
-        .then((data) => {
-          setLoading(false);
-          setNoticeData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching notice data:', error);
-          setLoading(false);
-          // Handle the error or set noticeData to a default value (e.g., [])
-          setNoticeData([]);
-        });
-    }, []);
+    //   fetch("https://book-your-college-server-copy.vercel.app/notice")
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       setLoading(false);
+    //       setNoticeData(data);
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error fetching notice data:', error);
+    //       setLoading(false);
+    //       // Handle the error or set noticeData to a default value (e.g., [])
+    //       setNoticeData([]);
+    //     });
+    // }, []);
   
     const handleDelete = (id) => {
       Swal.fire({
@@ -61,7 +64,7 @@ const MyNotice = () => {
                     popup: "animate__animated animate__fadeOutUp",
                   },
                 });
-                location.reload();
+                refetch();
               }
             })
             .catch((error) => console.log(error));
@@ -88,7 +91,7 @@ const MyNotice = () => {
   <figure><img src={notice?.img} className="w-full h-60 lg:h-80" alt="img" /></figure>
     <h2 className="card-title">{notice.title}</h2>
     <div className="divider "></div>
-    <p>{notice.details}</p>
+    <p>{parse(notice.details)}</p>
     <div className="flex justify-around">
     <button
                       onClick={() => handleDelete(notice._id)}

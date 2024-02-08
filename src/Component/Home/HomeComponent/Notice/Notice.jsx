@@ -3,35 +3,21 @@ import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { BsArrowBarLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import UseNotice from "../../../../hooks/UseNotice";
 
 const Notice = () => {
-    const [noticeData, setNoticeData] = useState([]);
+    const {noticeData, refetch} = UseNotice();
+
     const [loading, setLoading] = useState(true);
 
     console.log(noticeData);
-    // fetch Notice data
-  useEffect(() => {
- 
-
-    fetch("https://book-your-college-server-copy.vercel.app/notice")
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setNoticeData(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching blog data:', error);
-        setLoading(false);
-        // Handle the error or set noticeData to a default value (e.g., [])
-        setNoticeData([]);
-      });
-  }, []);
+    
     return (
         <div className="  bg-red-200 flex text-black">
           <p className="bg-red-500 text-xs text-white p-2 rounded">Latest Notice:</p>
           
               <Marquee >{noticeData.map((notice) => ( 
-   <Link to='/allnotice' key={notice._id} className="mx-4 flex items-center "> <BsArrowBarLeft /><span className="mx-2">{notice?.title}</span></Link>
+   <Link to={`/notice/${notice._id}`}  key={notice._id} className="mx-4 flex items-center hover:text-blue-600"> <span className="mx-2">{notice?.title}</span>|</Link>
    ))}
   
   </Marquee>

@@ -3,7 +3,8 @@ import line from "../../assets/Img/line.png";
 import * as XLSX from "xlsx";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import Swal from "sweetalert2";
-
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import {
   FaCalculator,
   FaMinusCircle,
@@ -153,24 +154,37 @@ console.log(yearData);
     setOverallYearCGPA(overallCGPA);
   };
 
-  const exportToExcel = () => {
-    const wb = XLSX.utils.book_new();
-    const wsData = [];
-    
-    yearData.forEach((year, yearIndex) => {
-        wsData.push([`Semester ${yearIndex + 1}`,"", "Sub", "Point", "Credit", ""]);
-        year.pointCreditPairs.forEach(pair => {
-            wsData.push(["","", pair.name, pair.point, pair.credit, ""]);
-        });
-        wsData.push(["", "", "", "", `CGPA: ${year.calculatedCGPA ? year.calculatedCGPA.toFixed(2) : ""}`]);
-        
-    });
-    wsData.push([ "", "", overallYearCGPA ? `Overall CGPA: ${overallYearCGPA.toFixed(2)}` : " "]);
+  const exportToPdf = () => {
+    const doc = new jsPDF();
 
-    const ws = XLSX.utils.aoa_to_sheet(wsData);
-    XLSX.utils.book_append_sheet(wb, ws, "CGPA Data");
-    XLSX.writeFile(wb, "cgpa_data.xlsx");
+    // Define columns for the table
+    const columns = ["Semester", "Subject", "Point", "Credit", "CGPA"];
+    
+
+    // Define rows for the table
+    const rows = [];
+
+    yearData.forEach((year, yearIndex) => {
+        rows.push([{ content: `Semester ${yearIndex + 1}`, colSpan: 5, styles: { fontStyle: 'bold' } }]);
+        year.pointCreditPairs.forEach(pair => {
+            rows.push(["", pair.name, pair.point, pair.credit,  ""]);
+        });
+        const YearCgpa = year.calculatedCGPA;
+        rows.push(["", "", "", "", YearCgpa ? ` CGPA: ${YearCgpa.toFixed(2)}` : ""]);
+    });
+
+    rows.push(["", "",  overallYearCGPA ? `Overall CGPA: ${overallYearCGPA.toFixed(2)}` : ""]);
+    // Add the table to the PDF document
+    doc.autoTable({
+        head: [columns],
+        body: rows,
+        startY: 10,
+    });
+
+    // Save the PDF file
+    doc.save('cgpa_data.pdf');
 };
+
 
 
 
@@ -354,7 +368,7 @@ console.log(yearData);
             <FaMinusCircle />
             remove Semester
           </button>
-          <button className="btn bg-red-700 m-2" onClick={exportToExcel}>
+          <button className="btn bg-red-700 m-2" onClick={exportToPdf}>
             <FaPrint className="text-white" />
           </button>
         </>

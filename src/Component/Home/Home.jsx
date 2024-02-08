@@ -6,7 +6,8 @@ import Gallery from './HomeComponent/Gallery/Gallery';
 import line from "../../assets/Img/line.png"
 import { Link } from 'react-router-dom';
 import StudentComment from './HomeComponent/StudentComment/StudentComment';
-import Card from './HomeComponent/Card/Card';
+
+import LatestBlogsSlider from './HomeComponent/LatestBlogsSlider/LatestBlogsSlider';
 
 const Home = () => {
     
@@ -23,7 +24,8 @@ const Home = () => {
         <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
         <p className="text-[18px] font-lato  dark:text-gray-200">Say goodbye to the days of tedious calculations and messy spreadsheets! UniVerse takes the hassle out of monitoring your academic progress with its lightning-fast CGPA calculation tool. Simply input your grades and credits, and watch as UniVerse instantly delivers your accurate CGPA, saving you precious time and stress. <Link to='/cgpa' className=' text-blue-600 hover:underline'> Calculate Your CGPA</Link></p>
         </div>
-{/* <Card/> */}
+
+<LatestBlogsSlider/>
             <Gallery/>
 
             <MentorsCard/>
