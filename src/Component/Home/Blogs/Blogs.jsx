@@ -11,14 +11,6 @@ import UseBlogs from "../../../hooks/UseBlogs";
 const Blogs = () => {
   const {blogs,refetch} = UseBlogs();
  
-  
-  const [loading, setLoading] = useState(true);
-
-
-
-
-
-
     return (
       <div >
     
@@ -37,8 +29,8 @@ const Blogs = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '>
           {blogs.map((blog) => (
 
-
-<div key={blog._id} className=" c border-sky-500 card w-96 bg-white shadow-xl ">
+<div key={blog._id}>
+<Link to={`/blog/${blog._id}`}  className="max-w-xs mx-4 my-4  overflow-hidden border-sky-500 card w-96 h-96 bg-white shadow-xl ">
 <figure>
     <img className="w-full h-60 lg:h-80" src={blog.img}  alt="No image" />
  
@@ -48,12 +40,15 @@ const Blogs = () => {
     {blog?.title}
   </h2>
   <div className="border-y-2 "></div>
-  <p className="text-black">{parse(blog.details)}</p>
+  <p className="text-black">{parse(blog.details.slice(0, 50))}... </p>
   <div className="card-actions justify-end">
   <div className="badge badge-secondary">{blog?.name}</div>
   </div>
 </div>
+</Link>
 </div>
+
+
           ))}
 
 

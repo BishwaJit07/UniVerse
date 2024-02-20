@@ -297,21 +297,21 @@ console.log(yearData);
               </div>
               <div className="flex justify-between">
                 <button
-                  className="text-[20px] font-bold w-[40%] ms-1 md:mx-2  lg:rounded-full rounded-xl  text-black border-dashed    border-black border-2 p-[5px] flex justify-center items-center m-4"
+                  className="text-[20px] font-bold w-[40%] ms-1 md:mx-2  lg:rounded-full rounded-xl text-white bg-green-600 flex justify-center items-center m-4"
                   onClick={() => addInputField(yearIndex)}
                 >
                   <AiOutlinePlusCircle className="mx-2" />
                   Add
                 </button>
                 <button
-                  className="text-[20px] font-bold w-[40%] mx-2  lg:rounded-full rounded-xl  text-black border-dashed border-red-400 border-2 p-[5px] flex justify-center items-center m-4"
+                  className="text-[20px] font-bold w-[40%] mx-2  lg:rounded-full rounded-xl  bg-red-500 text-white    flex justify-center items-center m-4"
                   onClick={() => removeInputField(yearIndex)}
                 >
                   <AiOutlineMinusCircle className="mx-2" />
                   Remove
                 </button>
                 <button
-                  className="text-[20px] font-bold w-[40%] mx-2lg:rounded-full rounded-xl  text-black border-dashed border-green-600 border p-[5px] flex justify-center items-center me-1 md: m-4"
+                  className="text-[20px] font-bold w-[40%] mx-2lg:rounded-full rounded-xl  text-white bg-blue-700  flex justify-center items-center me-1 md: m-4"
                   onClick={() => calculateCGPA(yearIndex)}
                 >
                   Calculate CGPA

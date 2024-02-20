@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UseBlogs from '../../../../hooks/UseBlogs';
+import parse from 'html-react-parser';
 import line from "../../../../assets/Img/line.png";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Virtual, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay,Virtual, Navigation, Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -32,7 +33,7 @@ const LatestBlogsSlider = () => {
         <p className="text-[48px] font-alice  dark:text-white">
          Latest Blogs{" "}
         </p>
-        <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
+        <img src={line} alt="" className="w-[105px] mx-auto mb-[30px] " />
        
       </div>
       <Swiper
@@ -58,7 +59,7 @@ const LatestBlogsSlider = () => {
           spaceBetween: 50,
         },
       }}
-            modules={[Virtual, Navigation, Pagination]}
+            modules={[Autoplay,Virtual, Navigation, Pagination]}
             onSwiper={setSwiperRef}
             slidesPerView={3.5}
             centeredSlides={true}
@@ -71,31 +72,37 @@ const LatestBlogsSlider = () => {
               prevEl: prevRef.current,
               nextEl: nextRef.current,
             }}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
             onSlideChange={updateIndex}
             onInit={() => setInit(true)}
             virtual
       >
         
         {reversedBlogs.map((blog) => (
-    <SwiperSlide key={blog._id}>
-        <div>
-            <div className="border-sky-500 card h-[580px]  m-2  shadow-xl">
-                <figure>
-                    <img className="w-full h-40 " src={blog.img} alt="No image" />
-                </figure>
-                <div className="card-body">
-                    <h2 className="card-title text-black flex justify-center">
-                        {blog?.title}
-                    </h2>
-                    <div className="border-y-2"></div>
-                    <p className="text-black">{blog.details.slice(0, 20)}... <Link to={`/blog/${blog._id}`}className="text-blue-500 text-xs hover:underline ">see more</Link></p>
-                    <div className="card-actions justify-end">
-                        <div className="badge badge-secondary">{blog?.name}</div>
-                    </div>
-                </div>
-            </div>
+    <SwiperSlide className='mx-2 rounded-xl' key={blog._id}>
+    <Link to={`/blog/${blog._id}`}>
+    <div className="card w-96 h-96 md:h-[484px] shadow-xl">
+    <figure className="h-3/5 md:h-3/5 overflow-hidden"> {/* Adjust height as needed */}
+        <img className="w-full h-full object-cover p-4" src={blog.img} alt="No image" />
+    </figure>
+    <div className="card-body items-center text-center">
+        <h2 className="card-title text-black">
+            {blog?.title}
+        </h2>
+        <div className="border-y-2"></div>
+        <p className="text-black">{parse(blog.details.slice(0, 20))}... <Link to={`/blog/${blog._id}`} className="text-blue-500 text-xs hover:underline">see more</Link></p>
+        <div className="card-actions justify-end">
+            <div className="badge badge-secondary">{blog?.name}</div>
         </div>
-    </SwiperSlide>
+    </div>
+</div>
+
+
+    </Link>
+            </SwiperSlide>
 ))}
 
        

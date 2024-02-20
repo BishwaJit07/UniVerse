@@ -9,16 +9,22 @@ const ExpectedCgpa = () => {
     const [currentCgpa, setCurrentCgpa] = useState('');
     const [currentSemesterCredit, setCurrentSemesterCredit] = useState('');
 
+    console.log(expectedCgpa,creditCompleted,currentCgpa,currentSemesterCredit);
     const handleCalculate = (e) => {
         e.preventDefault();
         // Perform the calculation
-        const result = (expectedCgpa * (parseInt(creditCompleted) + parseInt(currentCgpa)) - (parseInt(creditCompleted) * parseInt(currentCgpa))) / parseInt(currentSemesterCredit);
-
+        const cal1 = (creditCompleted + currentSemesterCredit)
+        const cal1Into = expectedCgpa *cal1
+        const call2 = ( creditCompleted * currentCgpa)
+        const result = (  cal1Into - call2 ) 
+console.log(cal1,cal1Into,call2,result);
+        const finalResult =( result / currentSemesterCredit
+        )
         // Display the result using SweetAlert
         Swal.fire({
             icon: 'success',
-            title: 'Expected CGPA Calculation Result',
-            text: `Your Expected CGPA is: ${result.toFixed(2)}`,
+           
+            title: `You need to achieve: ${finalResult.toFixed(2)} in this semester`,
         });
     };
 
@@ -31,36 +37,40 @@ const ExpectedCgpa = () => {
           <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
         </div>
             <form onSubmit={handleCalculate}>
-                <div className="m-2 bg-blue-500 text-xl text-white text-center">Expected CGPA</div>
+                <div className="m-2 bg-blue-500 text-xl text-white text-center ">Expected CGPA</div>
                 <div>
                     <div className="flex flex-col md:flex-row justify-center items-center">
                         <input
                             type="number"
                             placeholder={`Enter expected CGPA `}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg input-info block p-2.5 w-full max-w-xs m-4"
+                            required
                             value={expectedCgpa}
-                            onChange={(e) => setExpectedCgpa(e.target.value)}
+                            onChange={(e) => setExpectedCgpa(parseFloat(e.target.value))}
                         />
                         <input
                             type="number"
                             placeholder={`Credit Completed `}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg input-info block p-2.5 w-full max-w-xs m-4"
+                            required
                             value={creditCompleted}
-                            onChange={(e) => setCreditCompleted(e.target.value)}
+                            onChange={(e) => setCreditCompleted(parseFloat(e.target.value))}
                         />
                         <input
                             type="number"
                             placeholder={`Current Cgpa `}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg input-info block p-2.5 w-full max-w-xs m-4"
+                            required
                             value={currentCgpa}
-                            onChange={(e) => setCurrentCgpa(e.target.value)}
+                            onChange={(e) => setCurrentCgpa(parseFloat(e.target.value))}
                         />
                         <input
                             type="number"
                             placeholder={`Current semister Credit `}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg input-info block p-2.5 w-full max-w-xs m-4"
+                            required
                             value={currentSemesterCredit}
-                            onChange={(e) => setCurrentSemesterCredit(e.target.value)}
+                            onChange={(e) => setCurrentSemesterCredit(parseFloat(e.target.value))}
                         />
                     </div>
                 </div>

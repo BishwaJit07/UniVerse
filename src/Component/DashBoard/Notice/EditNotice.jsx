@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import UseNotice from '../../../hooks/UseNotice';
+import JoditEditor from 'jodit-react';
 
 const EditNotice = () => {
     const { register, handleSubmit, setValue } = useForm();
     const navigate = useNavigate();
     const { id } = useParams();
-  
+    const {noticeData, refetch} = UseNotice();
+    const notice = noticeData.find((notice) => notice._id === id);
+
+    const [descriptionValue, setDescriptionValue] = useState(notice?.details);
+
     useEffect(() => {
       // Fetch existing blog data based on the ID
       fetch(`https://book-your-college-server-copy.vercel.app/notice/${id}`)
@@ -26,7 +32,7 @@ const EditNotice = () => {
     const onSubmit = (noticeData) => {
       const finalData = {
         title: noticeData.title,
-        details: noticeData.details,
+        details: descriptionValue,
         img: noticeData.img,
         email: noticeData.email,
         name: noticeData.name,
@@ -62,7 +68,7 @@ const EditNotice = () => {
         <div>
         {/* title  */}
    <div className="text-center mb-12 mt-4">
-   <p className="text-[48px] font-alice  dark:text-white">Add Blogs </p>
+   <p className="text-[48px] font-alice  dark:text-white">Edit Notice </p>
    {/* <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" /> */}
  
  </div>
@@ -84,7 +90,11 @@ const EditNotice = () => {
    {/* input field */}
    <div className='m-4 md:mr-2 md:mb-0'>
      <label htmlFor="description" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Description</label>
-     <textarea {...register('details', {required: true})} id="description" rows="4" className="w-full px-3 py-2 text-sm leading-tight text-gray-700  border rounded shadow appearance-none focus:outline-none focus:shadow-outline" placeholder="Write your thoughts here..."></textarea>
+     <JoditEditor defaultValue={notice?.details}
+    value={descriptionValue}
+    onChange={(newContent) => setDescriptionValue(newContent)}
+    tabIndex={1}
+  />
    </div>
    <button className='text-[20px] font-bold w-[50%] mx-auto bg-blue-500 rounded-full text-white py-[13px]  flex justify-center items-center '>Done</button>
    </form>

@@ -14,7 +14,7 @@ const AddBlogs = () => {
     const navigate = useNavigate();
     const [imgUrl,setImgUrl] =useState();
     const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-    const image_hosting_api = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
+    const image_hosting_api = `https://api.imgbb.com/1/upload?expiration=1296000&key=${image_hosting_key}`
 
     const onSubmit = (blogData) => {
   
@@ -131,6 +131,7 @@ const AddBlogs = () => {
     value={descriptionValue}
     onChange={(newContent) => setDescriptionValue(newContent)}
     tabIndex={1}
+    className="text-black"
   />
           {errors.details && (
             <span className="text-red-600  rounded-sm ">This field is required</span>

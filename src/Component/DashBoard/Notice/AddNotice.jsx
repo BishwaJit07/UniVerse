@@ -14,7 +14,7 @@ const AddNotice = () => {
     const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
     console.log(image_hosting_key);
      const [imgUrl,setImgUrl] =useState()
-    const image_hosting_api = `https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_key}`
+    const image_hosting_api = `https://api.imgbb.com/1/upload?expiration=1296000&key=${image_hosting_key}`
 
     const onSubmit = async (noticeData) => {
       try {
@@ -122,11 +122,13 @@ const AddNotice = () => {
 
         {/* input field */}
         <div className='m-4 md:mr-2 md:mb-0'>
-          <label htmlFor="description" className="block mb-2 text-sm font-bold text-gray-700 dark:text-white">Description</label>
-          <JoditEditor
+          <label htmlFor="description" className="block mb-2 text-sm font-bold dark:text-white">Description</label>
+          <JoditEditor 
     value={descriptionValue}
     onChange={(newContent) => setDescriptionValue(newContent)}
     tabIndex={1}
+    className="text-black"
+
   /><br />
           {errors.title && (
             <span className="text-red-600  rounded-sm ">This field is required</span>

@@ -1,46 +1,17 @@
 import React from 'react';
 import line from "../../assets/Img/line.png"
-import aboutimg from "../../assets/Img/aboutimg.png"
-import { FcCustomerSupport } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+
 import stu1 from '../../assets/Img/stu1.png'
 import stu2 from '../../assets/Img/stu2.png'
 import stu3 from '../../assets/Img/stu3.png'
 import stu4 from '../../assets/Img/stu4.png'
+import MentorsCard from '../Home/HomeComponent/MentorsCard/MentorsCard';
 
 const AboutPage = () => {
     return (
         <div className="flex-grow max-w-screen-xl mx-4 lg:mx-auto">
 
-                 {/* title  */}
-          <div className="text-center mb-12  mt-4">
-        <p className="text-[48px] font-alice  dark:text-white">About Us </p>
-        <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
-        </div>
-      <h2></h2>
-
-      <div className='flex flex-col md:flex-row'>
-            <img src={aboutimg} alt="" className='rounded'/>
-            <p className='m-2 flex justify-center items-center text-center'>UniVerse isn't just a platform, it's a movement. We're a team of passionate students who understand the struggles and triumphs of academic life. We've experienced the late-night calculations, the blog post drafts lost in frustration, and the frantic search for important university updates. That's why we decided to build UniVerse – a one-stop hub designed to ease those burdens and empower students to focus on what truly matters: learning, growing, and thriving..</p>
-            </div>
-
-
-            {/* card 2  */}
-
-                    {/* title  */}
-          <div className="text-center mb-12 mt-4">
-        <p className="text-[48px] font-alice  dark:text-white">Our Story </p>
-        <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
-        </div>
-      <h2></h2>
-
-      <div className='flex flex-col md:flex-row'>
-          
-            <p className='m-2 flex justify-center items-center text-center'>Our mission is simple: to equip every student with the tools and resources they need to excel. We believe that technology can be a powerful force for good in education, and UniVerse is our way of proving it. We're constantly innovating, adding new features, and seeking feedback from the very community we serve – because after all, who knows what students need better than students themselves?</p>
-
-            <img src={aboutimg} alt="" className='rounded'/>
-            </div>
-            
+<MentorsCard/>     
 
        
 
@@ -51,7 +22,7 @@ const AboutPage = () => {
         <p className="text-[48px] font-alice  dark:text-white">Our Team </p>
         <img src={line} alt="" className="w-[105px] mx-auto mb-[30px]" />
         </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  lg:gap-7 justify-center  max-w-7xl mx-auto mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  lg:gap-5 justify-between   max-w-8xl mx-auto mb-12">
 
 {/* card 1*/}
 

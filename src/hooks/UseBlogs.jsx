@@ -7,6 +7,7 @@ const UseBlogs = () => {
         const res = await fetch("https://book-your-college-server-copy.vercel.app/blogs");
         return res.json();
       }});
+      
   return { blogs, refetch };
 };
 
